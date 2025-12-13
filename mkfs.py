@@ -8,7 +8,8 @@ folders = [
     "home",
     "home/user",
     "data",
-    "data/logs"
+    "data/logs",
+    "lib",
 ]
 
 for f in folders:
