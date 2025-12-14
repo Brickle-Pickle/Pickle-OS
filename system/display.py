@@ -1,12 +1,13 @@
 from machine import Pin, SoftI2C, I2C
 from lib import ssd1306
+from system import config
 import time
 
 print("Initializing displays...")
 
 # Initialize first display (bigger)
 try:
-    i2c_big = SoftI2C(sda=Pin(3), scl=Pin(2), freq=400000)
+    i2c_big = SoftI2C(sda=Pin(config.SCREEN_BIG_SDA_PIN), scl=Pin(config.SCREEN_BIG_SCL_PIN), freq=400000)
     display_big = ssd1306.SSD1306_I2C(128, 64, i2c_big)
     display_big.fill(0)
     display_big.text("DISPLAY 1", 10, 20)
@@ -18,7 +19,7 @@ except Exception as e:
 
 # Initialize second display (smaller)
 try:
-    i2c_small = I2C(0, sda=Pin(4), scl=Pin(5), freq=400000)
+    i2c_small = I2C(0, sda=Pin(config.SCREEN_SMALL_SDA_PIN), scl=Pin(config.SCREEN_SMALL_SCL_PIN), freq=400000)
     display_small = ssd1306.SSD1306_I2C(128, 32, i2c_small)
     print("Display 2 (I2C0) detected.")
 except Exception as e:
