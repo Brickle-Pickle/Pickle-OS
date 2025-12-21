@@ -1,12 +1,12 @@
 # display.py -> Manages display initialization and rendering.
-import machine
+from machine import Pin, SoftI2C
 import framebuf
 from lib import ssd1306
 
 class Display:
-    def __init__(self, width, height, scl_pin, sda_pin, i2c_addr):
-        self.i2c = machine.I2C(0, scl=machine.Pin(scl_pin), sda=machine.Pin(sda_pin), freq=400000)
-        self.display = ssd1306.SSD1306_I2C(width, height, self.i2c, addr=i2c_addr)
+    def __init__(self, width, height, scl_pin, sda_pin, i2c_id, i2c_addr):
+        self.i2c = SoftI2C(sda=Pin(sda_pin), scl=Pin(scl_pin), freq=400000)
+        self.display = ssd1306.SSD1306_I2C(width, height, self.i2c)
         self.text_size = 1
 
     def fill(self, color):
@@ -15,7 +15,13 @@ class Display:
 
     def text(self, string, x, y, color=1):
         if self.text_size == 1:
-            self.display.text(string, x, y, color)
+            if color == "inverted":
+                # Fill the background of the actual text position
+                self.display.fill_rect(x, y, len(string) * 8, 8, 1)
+                # Draw the text on top of the filled background
+                self.display.text(string, x, y, 0)
+            else:
+                self.display.text(string, x, y, color)
         else:
             self._draw_scaled_text(string, x, y, color, self.text_size)
 

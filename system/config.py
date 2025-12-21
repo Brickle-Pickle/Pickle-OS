@@ -6,7 +6,7 @@ from system.sd_reader import SDReader
 # Constant definitions
 SYSTEM_NAME = "PickleOS"
 DEVELOPER = "BRICKLE PICKLE"
-VERSION = "0.0.4"
+VERSION = "0.0.5"
 DEBUG_MODE = True
 BOARD_TYPE = "ESP32-C3"  # Options: "PICO", "ESP32-C3"
 
@@ -33,8 +33,8 @@ MICRO_SD_CLK_PIN = 6
 MICRO_SD_CS_PIN = 7
 
 # Displays
-BIG_DISPLAY = Display(128, 64, BIG_SCREEN_SCL_PIN, BIG_SCREEN_SDA_PIN, i2c_addr=0x3C)
-SMALL_DISPLAY = Display(128, 32, SMALL_SCREEN_SCL_PIN, SMALL_SCREEN_SDA_PIN, i2c_addr=0x3C)
+BIG_DISPLAY = Display(128, 64, BIG_SCREEN_SCL_PIN, BIG_SCREEN_SDA_PIN, i2c_id=0, i2c_addr=0x3C)
+SMALL_DISPLAY = Display(128, 32, SMALL_SCREEN_SCL_PIN, SMALL_SCREEN_SDA_PIN, i2c_id=-1, i2c_addr=0x3C)
 
 # Buttons
 BUTTON_LEFT = Button(BUTTON_LEFT_PIN)
