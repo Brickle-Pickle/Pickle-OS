@@ -8,7 +8,7 @@ import time
 FRAME_DELAY = 0.12
 LAST_FRAME_DELAY = 3
 
-i2c = SoftI2C(sda=Pin(config.SCREEN_BIG_SDA_PIN), scl=Pin(config.SCREEN_BIG_SCL_PIN), freq=400000)
+i2c = SoftI2C(sda=Pin(config.BIG_SCREEN_SDA_PIN), scl=Pin(config.BIG_SCREEN_SCL_PIN), freq=400000)
 display = ssd1306.SSD1306_I2C(128, 64, i2c)
 
 def show_splash():
@@ -1401,18 +1401,12 @@ def show_splash():
 	
     frames = [frame1, frame2, frame3, frame4, frame5, frame6, frame7, frame8, frame9, frame10, frame11, frame12, frame13, frame14, frame15, frame16, frame17, frame18, frame19, frame20, frame21]
 
-    config.GREEN_LED.on()
-    time.sleep(0.1)
-
     for frame in frames:
         display.buffer[:] = frame
         display.show()
         time.sleep(FRAME_DELAY)
 
-    config.BUZZER.play_tone(frequency=config.BUZZER_FREQUENCY_STANDARD, duration=config.BUZZER_DURATION_MID)
     time.sleep(LAST_FRAME_DELAY)
-    
-    config.GREEN_LED.off()
 
     display.fill(0)
     display.show()

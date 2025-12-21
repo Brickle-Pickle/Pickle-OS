@@ -6,7 +6,7 @@
 ![Hardware](https://img.shields.io/badge/Hardware-RP2040-red?style=flat&logo=raspberrypi)
 ![Status](https://img.shields.io/badge/Status-Alpha-orange)
 
-**Pickle OS** is a shell environment and simulated operating system designed to run on the **Raspberry Pi Pico (RP2040)**. It transforms the microcontroller into a standalone "Cyberdeck" style mini-PC that operates independently of an external computer.
+**Pickle OS** is a shell environment and simulated operating system designed to run on the **Esp32 C3 SuperMini**. It transforms the microcontroller into a standalone "Cyberdeck" style mini-PC that operates independently of an external computer.
 
 The system uses a **dual-screen architecture**: one display for terminal output and system feedback, and a secondary display dedicated exclusively to a dynamic virtual keyboard controlled by physical buttons.
 
@@ -22,45 +22,20 @@ The system uses a **dual-screen architecture**: one display for terminal output 
 
 This project is designed for the following BOM (Bill of Materials):
 
-* **MCU:** Raspberry Pi Pico W (or standard Pico).
+* **MCU:** Esp32 C3 SuperMini.
 * **Displays:**
     * 1x OLED 128x128 (1.5" RGB/Mono) - *Main Monitor*.
     * 1x OLED 128x32 (0.91") - *Virtual Keyboard*.
 * **Input:** 5x Push buttons (4 for direction + 1 action/back).
-* **Sensors:**
-    * Temperature sensor (Integrated in RP2040).
-* **Extras:**
-    * 1x Buzzer (Passive/Active).
-    * 2x LEDs (Red, Green).
-    * Resistors and decoupling capacitors.
 
 ## Pinout and Connections
 
-Pickle OS uses two independent I2C buses to maximize display refresh rates and avoid addressing conflicts.
-
-| Component | Physical Pin | Function | Notes |
-| :--- | :--- | :--- | :--- |
-| **OLED Main (128x128)** | GP2 | SCL (I2C1) | Main Monitor |
-| | GP3 | SDA (I2C1) | |
-| **OLED Keyb (128x32)** | GP5 | SCL (I2C0) | Virtual Keyboard |
-| | GP4 | SDA (I2C0) | |
-| **Buttons** | GP17 | UP | Internal Pull-up |
-| | GP18 | DOWN | Internal Pull-up |
-| | GP19 | LEFT | Internal Pull-up |
-| | GP20 | RIGHT | Internal Pull-up |
-| | GP21 | BACK/ENTER | Internal Pull-up |
-| **Sensors/Actuators** | GP13 | Buzzer | PWM |
-| | GP14 | Green LED | |
-| | GP15 | Red LED | |
-| | GP12 | TRIG/SDA | HC-SR04 or VL53L0X |
-| | GP11 | ECHO/SCL | *Check voltage levels* |
-
-> **Note:** If using the HC-SR04 sensor, ensure you use a voltage divider on the ECHO pin to step down the 5V signal to 3.3V to protect the Pico GPIO.
+Check the `system/config.py` file for detailed pin assignments and connections for displays, buttons, and other peripherals.
 
 ## Installation
 
-1.  **Flash MicroPython:** Install the latest MicroPython UF2 firmware onto your Raspberry Pi Pico.
-2.  **Dependencies:** Upload the `ssd1306.py` library to the `lib/` folder on your Pico (available via Thonny package manager).
+1.  **Flash MicroPython:** Install the latest MicroPython UF2 firmware onto your Esp32 C3 SuperMini.
+2.  **Dependencies:** Upload the `ssd1306.py` and `sdcard.py` library to the `lib/` folder on your device (available via Thonny package manager).
 3.  **Deployment:**
     * Clone this repository.
     * Upload `main.py`, `boot.py`, and all other files to the root of the device (if you want to have the base folder structure in pico execute `mkfs.py` {JUST ONCE}).
@@ -80,14 +55,12 @@ Once Pickle OS has booted, the following commands are available in the shell:
 
 ### Hardware & Utilities
 * `temp` - Show internal CPU temperature.
-* `beep [hz] [ms]` - Play a tone via the buzzer.
-* `led [color] [on/off]` - Control status LEDs.
 * `clear` - Clear the main screen.
 * `reboot` - Restart the system.
 
 ## Roadmap
 
-* [ ] SD Card support (Mass storage).
+* [X] SD Card support (Mass storage).
 * [ ] Full text editor (nano style).
 * [ ] WiFi connectivity (HTTP Client / Local Chat).
 * [ ] Mini-games (Snake / Pong).

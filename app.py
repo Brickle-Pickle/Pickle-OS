@@ -1,7 +1,6 @@
 # app.py -> Primary application logic.
 
 import os
-import sys
 import gc
 import time
 
@@ -13,50 +12,58 @@ time.sleep(3)
 print("[main] Checking file system status...")
 print(os.listdir())
 
-# Check folder structure
-required_folders = ['system', 'bin', 'data', 'apps', 'home']
-
-for folder in required_folders:
-    try:
-        os.stat(folder)
-        print(f"[main] Folder exists: {folder}")
-    except OSError:
-        print(f"[main] Creating missing folder: {folder}")
-        os.mkdir(folder)
-
-'''
-# Check its own imports
-actual_import = 'system'
-
-try:
-    import system
-    print("[main] 'system' module imported successfully.")
-
-    actual_import = 'bin'
-    import bin
-    print("[main] 'bin' module imported successfully.")
-
-    actual_import = 'data'
-    import data
-    print("[main] 'data' module imported successfully.")
-
-    actual_import = 'apps'
-    import apps
-    print("[main] 'apps' module imported successfully.")
-
-    actual_import = 'home'
-    import home
-    print("[main] 'home' module imported successfully.")
-except ImportError:
-    print("[main] Error:", actual_import, "module not found.")
-'''
-
 # Check memory status
 gc.collect()
 print("\n[main] Free memory", gc.mem_free(), "bytes")
 
-# Todo: Start main application loop
-'''
-while True:
-    print("[main] Main application loop running...")
-'''
+# Test controllers
+from system.config import BUTTON_LEFT, BUTTON_RIGHT, JOYSTICK
+print("\n[main] Testing Buttons and Joystick...")
+print(" Press LEFT button...")
+while not BUTTON_LEFT.is_pressed():
+    pass
+print(" LEFT button pressed.")
+
+print(" Press RIGHT button...")
+while not BUTTON_RIGHT.is_pressed():
+    pass
+print(" RIGHT button pressed.")
+
+print(" Move Joystick and press its button...")
+while not JOYSTICK.is_button_pressed():
+    print(" Joystick position:", JOYSTICK.get_position())
+    time.sleep(0.5)
+    pass
+print(" Joystick button pressed.")
+
+# Test displays
+from system.config import BIG_DISPLAY, SMALL_DISPLAY
+
+print("\n[main] Testing Displays...")
+BIG_DISPLAY.fill(0)
+SMALL_DISPLAY.fill(0)
+time.sleep(2)
+
+BIG_DISPLAY.fill(1)
+BIG_DISPLAY.show()
+SMALL_DISPLAY.fill(1)
+SMALL_DISPLAY.show()
+time.sleep(3)
+
+BIG_DISPLAY.clear()
+SMALL_DISPLAY.clear()
+
+# Test micro SD card reader
+from system.config import init_sd_reader
+print("\n[main] Testing Micro SD Card Reader...")
+try:
+    SD_READER = init_sd_reader()
+    SD_READER.mount()
+    print(" Micro SD card mounted successfully.")
+    print(" Contents:", os.listdir("/sd"))
+    SD_READER.unmount()
+    print(" Micro SD card unmounted successfully.")
+except Exception as e:
+    print(" Micro SD card test failed:", e)
+
+print("\n[main] All tests completed. Application is running.")

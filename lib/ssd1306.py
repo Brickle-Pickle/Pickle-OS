@@ -75,7 +75,7 @@ class SSD1306(framebuf.FrameBuffer):
     def show(self):
         x0 = 0
         x1 = self.width - 1
-        if self.width == 64:
+        if self.width == 64 and self.height == 32:
             # displays with width of 64 pixels are shifted by 32
             x0 += 32
             x1 += 32
@@ -85,7 +85,11 @@ class SSD1306(framebuf.FrameBuffer):
         self.write_cmd(SET_PAGE_ADDR)
         self.write_cmd(0)
         self.write_cmd(self.pages - 1)
-        self.write_framebuf()
+        self.write_framebuf() # type: ignore
+
+    def write_cmd(self, cmd):
+        # This method should be implemented by subclasses
+        raise NotImplementedError("write_cmd must be implemented by subclass")
 
 class SSD1306_I2C(SSD1306):
     def __init__(self, width, height, i2c, addr=0x3c, external_vcc=False):
