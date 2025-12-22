@@ -2,5 +2,6 @@
 input_buffer = {
     "enter": False,
     "input": "",
-    "lock": False,
+    "update_shell": False,
+    "errased": False
 }

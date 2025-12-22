@@ -1,19 +1,35 @@
 # app.py -> Primary application logic.
 import time
-import _thread
 from system.shell import Shell
 from system.keyboard import Keyboard
+from system.shared_states import input_buffer
 
 print("Initializing shell and keyboard...")
 SHELL = Shell("root") # For now, only root user is supported (TODO: Add user support)
 KEYBOARD = Keyboard()
 
-# Start the shell in a separate thread
-print("Starting shell thread...")
-_thread.start_new_thread(SHELL.run, ())
+while True:
+    # Check for user input
+    if (KEYBOARD.read_input()):
+        # If a key was pressed, wait a bit to avoid double presses
+        time.sleep(0.2)
 
-# Run the keyboard listener in the main thread
-# This will block and keep the program running
-print("Starting keyboard listener...")
+    # Check if keyboard needs to be rendered
+    if KEYBOARD.needs_render:
+        KEYBOARD.display_keyboard()
 
-KEYBOARD.run()
+    # Check if enter was pressed
+    if input_buffer["enter"]:
+        SHELL.display_prompt()
+        command = input_buffer["input"]
+        input_buffer["enter"] = False
+        input_buffer["input"] = ""
+        SHELL.history.append(command)
+        SHELL.history_index = len(SHELL.history)
+        SHELL.execute(command)
+
+    # Check if shell needs to be updated
+    if input_buffer["update_shell"]:
+        input_buffer["update_shell"] = False
+        SHELL.prompt = SHELL.user + input_buffer["input"]
+        SHELL.display_prompt()

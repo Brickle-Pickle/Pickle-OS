@@ -1,102 +1,82 @@
 # keyboard.py -> Keyboard interface for the MiniPC.
 from system.config import BUTTON_LEFT, BUTTON_RIGHT, JOYSTICK, SMALL_DISPLAY
 from system.shared_states import input_buffer
-import time
-
-STANDARD_WAIT_TIME = 0.3
 
 # Keyboard interface
 class Keyboard:
     def __init__(self):
         self.actual_pos = 0
-        self.keyboard_map = { 
-            "row_0": { "Q": 0, "W": 1, "E": 2, "R": 3, "T": 4, "Y": 5, "U": 6, "I": 7, "O": 8 },
-            "row_1": { "A": 9, "S": 10, "D": 11, "F": 12, "G": 13, "H": 14, "J": 15, "K": 16, "L": 17 },
-            "row_2": { "Z": 18, "X": 19, "C": 20, "V": 21, "B": 22, "N": 23, "M": 24, "P": 25, ">": 26 }
-        }
-        self.letter_map = [
-            "Q", "W", "E", "R", "T", "Y", "U", "I", "O",
-            "A", "S", "D", "F", "G", "H", "J", "K", "L",
-            "Z", "X", "C", "V", "B", "N", "M", "P", ">"
+        self.needs_render = True
+        self.keyboard_map = [
+            ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+            ["A", "S", "D", "F", "G", "H", "J", "K", "L", "."],
+            ["Z", "X", "C", "V", "B", "N", "M", " ", "-", ">"]
         ]
+        self.flat_keyboard = [letter for row in self.keyboard_map for letter in row]
+        self.row_lengths = [len(row) for row in self.keyboard_map]
+        self.row_starts = [0] * len(self.keyboard_map)
+        for i in range(1, len(self.keyboard_map)):
+            self.row_starts[i] = self.row_starts[i-1] + self.row_lengths[i-1]
 
     def display_keyboard(self):
         SMALL_DISPLAY.clear()
         pos_y = 0
-        for row in self.keyboard_map.values():
+        for row_idx, row in enumerate(self.keyboard_map):
             pos_x = 0
-            for letter, index in row.items():
+            for col_idx, letter in enumerate(row):
+                index = self.row_starts[row_idx] + col_idx
                 inverted_colors = (index == self.actual_pos)
+                SMALL_DISPLAY.set_text_size(2)
                 SMALL_DISPLAY.text(letter, pos_x, pos_y, "inverted" if inverted_colors else 1)
-                pos_x += 7
-            pos_y += 8
+                pos_x += 12
+            pos_y += 10
         SMALL_DISPLAY.show()
+        self.needs_render = False
 
-    def read(self):
-        self.display_keyboard()
-        
+    def read_input(self):
+        # Joystick values
+        x_value, y_value = JOYSTICK.get_position()
+
         # Joystick left
-        if JOYSTICK.is_left():
-            if self.actual_pos > 0:
-                if self.actual_pos != 9 and self.actual_pos != 18:
-                    self.actual_pos -= 1
-                else:
-                    self.actual_pos -= 9
-            else:
-                self.actual_pos = 27
-            
-            self.display_keyboard()
-            time.sleep(STANDARD_WAIT_TIME)
+        if x_value < 1000:
+            self.actual_pos = max(0, self.actual_pos - 1)
+            self.needs_render = True
+            return True
         # Joystick right
-        if JOYSTICK.is_right():
-            if self.actual_pos < 27:
-                if self.actual_pos != 8 and self.actual_pos != 17:
-                    self.actual_pos += 1
-                else:
-                    self.actual_pos += 9
-            else:
-                self.actual_pos = 0
-            
-            self.display_keyboard()
-            time.sleep(STANDARD_WAIT_TIME)
+        elif x_value > 60000:
+            self.actual_pos = min(len(self.flat_keyboard) - 1, self.actual_pos + 1)
+            self.needs_render = True
+            return True
         # Joystick up
-        if JOYSTICK.is_up():
-            if self.actual_pos > 8:
-                self.actual_pos -= 9
-            else:
-                self.actual_pos += 18
-            
-            self.display_keyboard()
-            time.sleep(STANDARD_WAIT_TIME)
+        elif y_value < 1000:
+            self.actual_pos = max(0, self.actual_pos - self.row_lengths[0])
+            self.needs_render = True
+            return True
         # Joystick down
-        if JOYSTICK.is_down():
-            if self.actual_pos < 18:
-                self.actual_pos += 9
-            else:
-                self.actual_pos -= 18
-            
-            self.display_keyboard()
-            time.sleep(STANDARD_WAIT_TIME)
+        elif y_value > 60000:
+            self.actual_pos = min(len(self.flat_keyboard) - 1, self.actual_pos + self.row_lengths[0])
+            self.needs_render = True
+            return True
 
         # Button pressed
         if BUTTON_RIGHT.is_pressed():
-            actual_letter = self.letter_map[self.actual_pos]
+            actual_letter = self.flat_keyboard[self.actual_pos]
             if actual_letter != ">":
                 input_buffer["input"] += actual_letter
-                self.display_keyboard()
-                time.sleep(STANDARD_WAIT_TIME)
+                input_buffer["update_shell"] = True
             else:
                 input_buffer["enter"] = True
-                self.display_keyboard()
-                time.sleep(STANDARD_WAIT_TIME)
+            self.needs_render = True
+            return True
 
         if BUTTON_LEFT.is_pressed():
+            print("Button left pressed")
             if input_buffer["input"]:
+                # Remove last letter
                 input_buffer["input"] = input_buffer["input"][:-1]
-                self.display_keyboard()
-                time.sleep(STANDARD_WAIT_TIME)
-
-    def run(self):
-        print("Keyboard is running...")
-        while True:
-            self.read()
+                input_buffer["update_shell"] = True
+                input_buffer["errased"] = True
+            self.needs_render = True
+            return True
+        
+        return False

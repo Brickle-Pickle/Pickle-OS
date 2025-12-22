@@ -26,6 +26,15 @@ class Display:
             self._draw_scaled_text(string, x, y, color, self.text_size)
 
     def _draw_scaled_text(self, string, x, y, color, size):
+        if color == "inverted":
+            # Pre-calculate the bounding box for the entire string
+            total_width = len(string) * (size * 4)  # Approximate width
+            total_height = size * 4  # Approximate height
+            self.display.fill_rect(x, y, total_width, total_height, 1)
+            draw_color = 0
+        else:
+            draw_color = color
+
         sizes = {1: 6, 2: 8, 3: 10, 4: 12}
         target_size = sizes.get(size, 8)
         src_size = 8
@@ -42,7 +51,7 @@ class Display:
                         draw_x = x + (i * target_size) + px
                         draw_y = y + py
                         if 0 <= draw_x < self.display.width and 0 <= draw_y < self.display.height:
-                            self.display.pixel(draw_x, draw_y, color)
+                            self.display.pixel(draw_x, draw_y, draw_color)
 
     def show(self):
         self.display.show()

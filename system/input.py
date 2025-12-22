@@ -37,19 +37,3 @@ class Joystick:
 
     def is_button_pressed(self):
         return self.button.is_pressed()
-
-    def is_left(self):
-        x_value, _ = self.get_position()
-        return x_value < 1000
-        
-    def is_right(self):
-        x_value, _ = self.get_position()
-        return x_value > 5000
-
-    def is_up(self):
-        _, y_value = self.get_position()
-        return y_value < 1000
-        
-    def is_down(self):
-        _, y_value = self.get_position()
-        return y_value > 5000
