@@ -31,7 +31,7 @@ while True:
     # Check if shell needs to be updated
     if input_buffer["update_shell"] or input_buffer["reset_shell"]:
         input_buffer["update_shell"] = False
-        SHELL.prompt = SHELL.user + input_buffer["input"]
+        SHELL.prompt = SHELL.user + input_buffer["actual_path"] + "> " + input_buffer["input"]
         SHELL.display_prompt()
 
     if input_buffer["reset_keyboard"]:

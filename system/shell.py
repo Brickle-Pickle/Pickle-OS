@@ -7,13 +7,13 @@ from system.config import BIG_DISPLAY
 
 class Shell:
     def __init__(self, user):
-        self.user = user + "> "
+        self.user = user
         self.current_dir = "/"
         self.running = True
         self.history = []
         self.history_index = 0
         self.history_max = 10
-        self.prompt = self.user
+        self.prompt = self.user + input_buffer["actual_path"] + "> "
         self.display_prompt()
 
     def display_prompt(self):
@@ -65,6 +65,6 @@ class Shell:
         # Clear the error message
         BIG_DISPLAY.clear()
         # Set the prompt to the user
-        self.prompt = self.user
+        self.prompt = self.user + input_buffer["actual_path"] + "> "
         self.display_prompt()
         input_buffer["errased"] = True
