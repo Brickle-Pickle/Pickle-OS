@@ -1,20 +1,13 @@
 # shell.py -> Shell interface for the MiniPC.
 import uos
 import time
-from bin import cat, cd, ls, mkdir, rm
+from bin import command_controller
 from system.shared_states import input_buffer
 from system.config import BIG_DISPLAY
 
 class Shell:
     def __init__(self, user):
         self.user = user + "> "
-        self.commands = {
-            "cat": cat,
-            "cd": cd,
-            "ls": ls,
-            "mkdir": mkdir,
-            "rm": rm,
-        }
         self.current_dir = "/"
         self.running = True
         self.history = []
@@ -50,20 +43,24 @@ class Shell:
         # Get the command name
         cmd = parts[0]
         # Get the command arguments
-        args = parts[1:]
+        args = parts[1:] if len(parts) > 1 else []
 
         # Check if the command exists
-        if cmd in self.commands:
+        if command_controller.is_command(cmd):
             # Execute the command
-            self.commands[cmd](*args)
+            if command_controller.execute_command(cmd, args) == "X":
+                self.command_not_found(cmd)
         else:
-            # Print an error message
-            BIG_DISPLAY.text("Command", 0, 25)
-            BIG_DISPLAY.text("not found", 0, 40)
-            BIG_DISPLAY.show()
-            time.sleep(2)
-            # Clear the error message
-            BIG_DISPLAY.clear()
-            # Set the prompt to the user
-            self.prompt = self.user
-            self.display_prompt()
+            self.command_not_found(cmd)
+
+    def command_not_found(self, cmd):
+        BIG_DISPLAY.text("Command: " + cmd, 0, 25)
+        BIG_DISPLAY.text("Not found", 0, 40)
+        BIG_DISPLAY.show()
+        time.sleep(2)
+        # Clear the error message
+        BIG_DISPLAY.clear()
+        # Set the prompt to the user
+        self.prompt = self.user
+        self.display_prompt()
+        input_buffer["errased"] = True

@@ -3,5 +3,7 @@ input_buffer = {
     "enter": False,
     "input": "",
     "update_shell": False,
-    "errased": False
+    "errased": False,
+    "reset_shell": False,
+    "reset_keyboard": False
 }

@@ -37,3 +37,17 @@ class Joystick:
 
     def is_button_pressed(self):
         return self.button.is_pressed()
+
+    def get_direction(self):
+        x_value, y_value = self.get_position()
+        if x_value < 1000:
+            return "left"
+        # Joystick right
+        elif x_value > 60000:
+            return "right"
+        # Joystick up
+        elif y_value < 1000:
+            return "up"
+        # Joystick down
+        elif y_value > 60000:
+            return "down"
