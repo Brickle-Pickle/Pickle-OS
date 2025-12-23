@@ -12,14 +12,7 @@ def cd(args):
         input_buffer["actual_path"] = "/"
     elif len(args) > 1:
         # Show an error message
-        BIG_DISPLAY.clear()
-        BIG_DISPLAY.text("cd: too many", 0, 10)
-        BIG_DISPLAY.text("arguments", 0, 20)
-        BIG_DISPLAY.show()
-        time.sleep(2)
-        # Clear the error message
-        BIG_DISPLAY.clear()
-        input_buffer["errased"] = True
+        BIG_DISPLAY.show_error(["cd: too many", "arguments"])
     elif args[0] == "..":
         # Change to the parent directory
         uos.chdir("..")
@@ -36,13 +29,7 @@ def cd(args):
                 uos.chdir(input_buffer["actual_path"] + "/" + args[0])
         except:
             # Show an error message
-            BIG_DISPLAY.clear()
-            BIG_DISPLAY.text("cd: no such file", 0, 10)
-            BIG_DISPLAY.text("or directory", 0, 20)
-            BIG_DISPLAY.show()
-            time.sleep(2)
-            # Clear the error message
-            BIG_DISPLAY.clear()
+            BIG_DISPLAY.show_error(["cd: no such file", "or directory"])
             input_buffer["errased"] = True
             return
         input_buffer["actual_path"] = uos.getcwd()

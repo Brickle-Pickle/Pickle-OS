@@ -1,7 +1,9 @@
 # display.py -> Manages display initialization and rendering.
 from machine import Pin, SoftI2C
 import framebuf
+import time
 from lib import ssd1306
+from system.shared_states import input_buffer
 
 class Display:
     def __init__(self, width, height, scl_pin, sda_pin, i2c_id, i2c_addr):
@@ -70,4 +72,13 @@ class Display:
 
     def set_text_size(self, size):
         self.text_size = max(1, min(size, 4))
-        
+    
+    def show_error(self, error_messages):
+        self.clear()
+        for i, msg in enumerate(error_messages):
+            self.text(msg, 0, i * 10)
+        self.show()
+        time.sleep(2)
+        # Clear the error message
+        self.clear()
+        input_buffer["errased"] = True

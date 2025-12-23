@@ -73,6 +73,9 @@ Once Pickle OS has booted, the following commands are available in the shell:
 * `cat [file]`
     - Display the contents of a file (only works with `.txt` and `.py` files).
     - `file` - Path to the file to display (relative or absolute).
+* `mkdir [dir_name]`
+    - Create a new directory.
+    - `dir_name` - Name of the directory to create.
 
 ### Utilities
 * `help` - Show the help menu (commands and options).
@@ -81,7 +84,7 @@ Once Pickle OS has booted, the following commands are available in the shell:
 ## Roadmap
 
 * [X] SD Card support (Mass storage).
-* [ ] File system operations (create, read, write, delete files and directories).
+* [ ] File system operations (create, show and delete files and directories).
 * [X] Route navigation (absolute and relative paths).
 * [ ] Full text editor (nano style extension `file.txt`).
 * [ ] System monitor (CPU, memory, disk usage).

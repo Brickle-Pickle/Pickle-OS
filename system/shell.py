@@ -58,13 +58,4 @@ class Shell:
             self.command_not_found(cmd)
 
     def command_not_found(self, cmd):
-        BIG_DISPLAY.text("Command: " + cmd, 0, 25)
-        BIG_DISPLAY.text("Not found", 0, 40)
-        BIG_DISPLAY.show()
-        time.sleep(2)
-        # Clear the error message
-        BIG_DISPLAY.clear()
-        # Set the prompt to the user
-        self.prompt = self.user + input_buffer["actual_path"] + "> "
-        self.display_prompt()
-        input_buffer["errased"] = True
+        BIG_DISPLAY.show_error(["Command: " + cmd, "Not found"])
