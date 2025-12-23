@@ -1,9 +1,9 @@
 # Pickle OS
 
-**The Crunchy Cyberdeck Terminal for RP2040**
+**The Crunchy Cyberdeck Terminal for Esp32 C3 SuperMini**
 
 ![MicroPython](https://img.shields.io/badge/MicroPython-Powered-blue?style=flat&logo=python)
-![Hardware](https://img.shields.io/badge/Hardware-RP2040-red?style=flat&logo=raspberrypi)
+![Hardware](https://img.shields.io/badge/ESP32-C3-red?style=flat&logo=Espressif)
 ![Status](https://img.shields.io/badge/Status-Alpha-orange)
 
 **Pickle OS** is a shell environment and simulated operating system designed to run on the **Esp32 C3 SuperMini**. It transforms the microcontroller into a standalone "Cyberdeck" style mini-PC that operates independently of an external computer.
@@ -15,7 +15,7 @@ The system uses a **dual-screen architecture**: one display for terminal output 
 * **Interactive Terminal:** Custom command-line interface (Shell) with history and visual feedback.
 * **Real File System:** Functional commands to create, read, write, and delete files (`ls`, `cat`, `touch`, `rm`, `mkdir`).
 * **Dedicated Virtual Keyboard:** Text input via a secondary OLED display and physical D-Pad navigation.
-* **Hardware Control:** Native commands to read sensors (temperature) and control actuators (LEDs, Buzzer).
+* **Storage:** SD Card support for file storage.
 * **Retro UI:** Monochromatic pixel-art interface optimized for low-power displays.
 
 ## Hardware Requirements
@@ -26,7 +26,9 @@ This project is designed for the following BOM (Bill of Materials):
 * **Displays:**
     * 1x OLED 128x128 (1.5" RGB/Mono) - *Main Monitor*.
     * 1x OLED 128x32 (0.91") - *Virtual Keyboard*.
-* **Input:** 5x Push buttons (4 for direction + 1 action/back).
+* **Input:** 
+    * 2x Push buttons (1 action + 1 back).
+    * 1x D-Pad (4-directional + 1 action) - *Virtual Keyboard Navigation*.
 
 ## Pinout and Connections
 
@@ -38,24 +40,33 @@ Check the `system/config.py` file for detailed pin assignments and connections f
 2.  **Dependencies:** Upload the `ssd1306.py` and `sdcard.py` library to the `lib/` folder on your device (available via Thonny package manager).
 3.  **Deployment:**
     * Clone this repository.
-    * Upload `main.py`, `boot.py`, and all other files to the root of the device (if you want to have the base folder structure in pico execute `mkfs.py` {JUST ONCE}).
-4.  **Boot:** Reset the device or reconnect power.
+    * Upload `main.py` (`app.py` if development still in progress), `boot.py`, and all other files to the root of the device (if you want to have the base folder structure and you are using a raspberry pi execute `mkfs.py` {JUST ONCE}).
+4. **Erase the following files:**
+    * `mkfs.py`
+    * `README.md`
+    * `home/user/README.md` (Optional if you know what you are doing) {You can update it with your own instructions}
+5.  **Boot:** Reset the device or reconnect power.
 
 ## Available Commands
 
 Once Pickle OS has booted, the following commands are available in the shell:
 
+### Options
+* `[]` - Mandatory argument.
+* `{}` - Optional argument.
+* `...` - Variable number of arguments.
+* `or` - Alternate options.
+
 ### File System
-* `ls` - List files and directories.
-* `cat [file]` - Display file content.
-* `touch [file]` - Create an empty file.
-* `rm [file]` - Delete a file.
-* `mkdir [dir]` - Create a directory.
-* `cd [path]` - Change directory.
+* `ls {path} {-l} {-d or -f}` 
+    - List files and directories (default path is current directory).
+    - `-l` - List files with detailed information.
+    - `-d` - List directories only.
+    - `-f` - List files only.
 
 ### Hardware & Utilities
+* `help` - Show the help menu (commands and options).
 * `temp` - Show internal CPU temperature.
-* `clear` - Clear the main screen.
 * `reboot` - Restart the system.
 
 ## Roadmap
@@ -64,6 +75,9 @@ Once Pickle OS has booted, the following commands are available in the shell:
 * [ ] Full text editor (nano style).
 * [ ] WiFi connectivity (HTTP Client / Local Chat).
 * [ ] Mini-games (Snake / Pong).
+* [ ] System settings (timezone, language, etc.).
+* [ ] User accounts and permissions.
+* [ ] Mobile app for remote access.
 
 ## Contributing
 
@@ -72,3 +86,4 @@ Pull Requests are welcome! If you have ideas for optimizing the display driver o
 ## License
 
 This project is licensed under the MIT License - feel free to use it, modify it, and build your own Cyberdeck.
+I would love to hear from you if you build something cool with this!
