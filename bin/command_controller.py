@@ -11,7 +11,7 @@ def is_command(command):
 
 def execute_command(command, args):
     if is_command(command):
-        command_controller[command](*args)
+                command_controller[command](args)
     else:
         return "X"
 

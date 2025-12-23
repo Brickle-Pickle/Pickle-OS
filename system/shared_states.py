@@ -5,5 +5,6 @@ input_buffer = {
     "update_shell": False,
     "errased": False,
     "reset_shell": False,
-    "reset_keyboard": False
+    "reset_keyboard": False,
+    "actual_path": ""
 }

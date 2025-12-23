@@ -21,12 +21,16 @@ class Shell:
             BIG_DISPLAY.clear()
             input_buffer["errased"] = False
         
-        BIG_DISPLAY.text(self.prompt, 0, 10)
-
-        # Verify if the prompt is too long to fit in the display and print it in separate lines
-        if len(self.prompt) > BIG_DISPLAY.get_width():
-            self.aux_prompt = self.prompt[-BIG_DISPLAY.get_width():]
-            BIG_DISPLAY.text(self.aux_prompt, 0, 20)
+        # We assume a character width of 8 pixels
+        num_chars = BIG_DISPLAY.get_width() // 8
+        
+        if len(self.prompt) > num_chars:
+            # Split the prompt into lines
+            lines = [self.prompt[i:i+num_chars] for i in range(0, len(self.prompt), num_chars)]
+            for i, line in enumerate(lines):
+                BIG_DISPLAY.text(line, 0, 10 + i * 10)
+        else:
+            BIG_DISPLAY.text(self.prompt, 0, 10)
 
         BIG_DISPLAY.show()
             
