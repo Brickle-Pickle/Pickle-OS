@@ -60,23 +60,41 @@ Once Pickle OS has booted, the following commands are available in the shell:
 ### File System
 * `ls {path} {-l} {-d or -f}` 
     - List files and directories (default path is current directory).
+    - `path` - Path to the directory to list (relative or absolute), if empty it will list the current directory.
     - `-l` - List files with detailed information.
     - `-d` - List directories only.
     - `-f` - List files only.
+* `cd {path}`
+    - Change the current working directory.
+    - `path` - Path to the directory to change to (relative or absolute), if empty it will change to the root directory.
+    - `path = ..` - Go to the parent directory.
+    - `path = /...` - Go to the ... directory starting from root (absolute path).
+    - `path = ...` - Go to the ... directory starting from the current directory (relative path).
+* `cat [file]`
+    - Display the contents of a file (only works with `.txt` and `.py` files).
+    - `file` - Path to the file to display (relative or absolute).
 
-### Hardware & Utilities
+### Utilities
 * `help` - Show the help menu (commands and options).
-* `temp` - Show internal CPU temperature.
 * `reboot` - Restart the system.
 
 ## Roadmap
 
 * [X] SD Card support (Mass storage).
-* [ ] Full text editor (nano style).
+* [ ] File system operations (create, read, write, delete files and directories).
+* [X] Route navigation (absolute and relative paths).
+* [ ] Full text editor (nano style extension `file.txt`).
+* [ ] System monitor (CPU, memory, disk usage).
+* [ ] User accounts and permissions.
+* [ ] Benchmarking tools (CPU, memory, disk speed).
+* [ ] Help menu (show available commands and options).
+* [ ] Paint (simple pixel art editor extension `file.bitimg`).
+* [ ] BitLense (simple image viewer extension `file.bitimg`).
+* [ ] PassFinder (simple password manager extension `file.pass`) {`file.pass` [made with PassFinder] is a text file that contains the passwords in the format `name:password` you need to provide a password to access the file}.
+* [ ] Crypter (convert `.txt` files to `.pass` files with a password).
 * [ ] WiFi connectivity (HTTP Client / Local Chat).
 * [ ] Mini-games (Snake / Pong).
 * [ ] System settings (timezone, language, etc.).
-* [ ] User accounts and permissions.
 * [ ] Mobile app for remote access.
 
 ## Contributing
