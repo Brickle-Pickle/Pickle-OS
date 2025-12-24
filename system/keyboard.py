@@ -9,7 +9,7 @@ class Keyboard:
         self.needs_render = True
         self.keyboard_map = [
             ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-            ["A", "S", "D", "F", "G", "H", "J", "K", "L", "."],
+            ["A", "S", "D", "F", "G", "H", "J", "K", "L", ".", "*"],
             ["Z", "X", "C", "V", "B", "N", "M", " ", "-", "/", ">"]
         ]
         self.flat_keyboard = [letter for row in self.keyboard_map for letter in row]

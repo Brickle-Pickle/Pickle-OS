@@ -13,7 +13,7 @@ The system uses a **dual-screen architecture**: one display for terminal output 
 ## Key Features
 
 * **Interactive Terminal:** Custom command-line interface (Shell) with history and visual feedback.
-* **Real File System:** Functional commands to create, read, write, and delete files (`ls`, `cat`, `touch`, `rm`, `mkdir`).
+* **Real File System:** Functional commands to create, read, write, and delete files (`ls`, `cat`, `cd`, `rm`, `mkdir`).
 * **Dedicated Virtual Keyboard:** Text input via a secondary OLED display and physical D-Pad navigation.
 * **Storage:** SD Card support for file storage.
 * **Retro UI:** Monochromatic pixel-art interface optimized for low-power displays.
@@ -76,6 +76,13 @@ Once Pickle OS has booted, the following commands are available in the shell:
 * `mkdir [dir_name]`
     - Create a new directory.
     - `dir_name` - Name of the directory to create.
+* `rm [file or dir or *] {-f}`
+    - Remove files or directories. <b style="color:red;"> `Warning: This action cannot be undone.`</b>
+    - `file or dir` - Path to the file or directory to remove (relative or absolute).
+    - `*` - Remove all files and directories in the current directory.
+    - `*.ext` - Remove all files with the specified extension in the current directory.
+    - `name.*` - Remove all files with the specified name in the current directory.
+    - `-f` - Force delete folders (without it, folders will not be deleted)
 
 ### Utilities
 * `help` - Show the help menu (commands and options).
@@ -84,7 +91,7 @@ Once Pickle OS has booted, the following commands are available in the shell:
 ## Roadmap
 
 * [X] SD Card support (Mass storage).
-* [ ] File system operations (create, show and delete files and directories).
+* [X] File system operations (create, show and delete files and directories).
 * [X] Route navigation (absolute and relative paths).
 * [ ] Full text editor (nano style extension `file.txt`).
 * [ ] System monitor (CPU, memory, disk usage).
