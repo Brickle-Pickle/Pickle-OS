@@ -6,7 +6,7 @@ from system.shared_states import input_buffer
 def rm(args):
     if len(args) == 0:
         BIG_DISPLAY.set_text_size(1)
-        BIG_DISPLAY.show_error("Error:", "Usage: rm <file>")
+        BIG_DISPLAY.show_info(["Error:", "Usage: rm <file>"])
         return
     
     files = []
@@ -49,7 +49,7 @@ def rm(args):
     if force_delete_folders:
         delete_folders(folders)
     
-    BIG_DISPLAY.show_error(["Success: files and", "folders deleted."])
+    BIG_DISPLAY.show_info(["Success: files and", "folders deleted."])
     BIG_DISPLAY.clear()
     BIG_DISPLAY.show()
     input_buffer["reset_keyboard"] = True
@@ -108,3 +108,6 @@ def delete_folders(folders):
     for folder in folders:
         full_path = path + "/" + folder if path != "/" else "/" + folder
         rmtree(full_path)
+
+def help():
+    BIG_DISPLAY.show_info(["Usage:", "rm <file>"], 4)

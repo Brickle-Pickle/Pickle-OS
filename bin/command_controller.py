@@ -1,15 +1,16 @@
 # command_controller.py -> Command controller for the MiniPC.
 import uos
 from bin import ls, cd, cat, mkdir, rm, nano, sys
+from system.config import BIG_DISPLAY
 
 command_controller = {
-    "ls": ls.ls,
-    "cd": cd.cd,
-    "cat": cat.cat,
-    "mkdir": mkdir.mkdir,
-    "rm": rm.rm,
-    "nano": nano.nano,
-    "sys": sys.sys,
+    "ls": ls,
+    "cd": cd,
+    "cat": cat,
+    "mkdir": mkdir,
+    "rm": rm,
+    "nano": nano,
+    "sys": sys,
 }
 
 def is_command(command):
@@ -17,13 +18,23 @@ def is_command(command):
 
 def execute_command(command, args):
     if is_command(command):
-                command_controller[command](args)
+        getattr(command_controller[command], command)(args)
     else:
         return "X"
 
 def get_command_help(command):
     if is_command(command):
-        return command_controller[command].help()
+        module = command_controller[command]
+        if hasattr(module, "help"):
+            module.help()
+            BIG_DISPLAY.clear()
+            BIG_DISPLAY.show()
+            input_buffer["reset_keyboard"] = True
+            input_buffer["reset_shell"] = True
+            return
+        else:
+            BIG_DISPLAY.show_info(["No help available", "for " + command], 2)
+            
     else:
         return "X"
 

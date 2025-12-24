@@ -97,3 +97,6 @@ def print_active_files(files, file_index, detailed):
         BIG_DISPLAY.show()
 
     return file_index
+
+def help():
+    BIG_DISPLAY.show_info(["Usage: ls [path]", "[-l] [-d] [-f]"], 4)

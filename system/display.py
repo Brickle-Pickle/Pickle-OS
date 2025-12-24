@@ -73,12 +73,12 @@ class Display:
     def set_text_size(self, size):
         self.text_size = max(1, min(size, 4))
     
-    def show_error(self, error_messages):
+    def show_info(self, error_messages, time = 2):
         self.clear()
         for i, msg in enumerate(error_messages):
             self.text(msg, 0, i * 10)
         self.show()
-        time.sleep(2)
+        time.sleep(time)
         # Clear the error message
         self.clear()
         input_buffer["errased"] = True

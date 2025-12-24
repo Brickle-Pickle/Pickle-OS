@@ -11,7 +11,7 @@ def sys(args):
     _disk = True if "-dsk" in args  or "-disk" in args else False
 
     if not _cpu and not _mem and not _disk:
-        BIG_DISPLAY.show_error(["Usage error:", "no options"])
+        BIG_DISPLAY.show_info(["Usage error:", "no options"])
         input_buffer["errased"] = True
         input_buffer["reset_keyboard"] = True
         input_buffer["reset_shell"] = True
@@ -27,8 +27,11 @@ def sys(args):
         stat = uos.statvfs("/")
         messages.append("DISK: {:02}%".format((stat[3] * 100) // stat[2])) # Only show % (max 2 digits)
 
-    BIG_DISPLAY.show_error(messages)
+    BIG_DISPLAY.show_info(messages)
     
     input_buffer["errased"] = True
     input_buffer["reset_keyboard"] = True
     input_buffer["reset_shell"] = True
+
+def help():
+    BIG_DISPLAY.show_info(["Usage:", "\"sys {-cpu} {-mem}", "{-dsk / -disk}\""], 6)

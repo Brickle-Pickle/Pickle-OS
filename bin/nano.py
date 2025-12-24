@@ -15,8 +15,8 @@ def create_file(file):
 def nano(args):
     readonly = "-r" in args
     if len(args) != 1 and not (len(args) == 2 and readonly):
-        BIG_DISPLAY.show_error(["Usage error:"])
-        BIG_DISPLAY.show_error(["nano [file] {-r}"])
+        BIG_DISPLAY.show_info(["Usage error:"])
+        BIG_DISPLAY.show_info(["nano [file] {-r}"])
         return
 
     file = None
@@ -74,7 +74,7 @@ def nano(args):
         if JOYSTICK.is_button_pressed():
             in_command = False
             save_file(file_path, content)
-            BIG_DISPLAY.show_error(["File saved"])
+            BIG_DISPLAY.show_info(["File saved"])
             input_buffer["errased"] = True
             input_buffer["reset_keyboard"] = True
             input_buffer["reset_shell"] = True
@@ -170,3 +170,6 @@ def open_file(file_path, readonly, file_name):
     else:
         cat([file_name])
         return "It is read-only"
+
+def help():
+    BIG_DISPLAY.show_info(["Usage:", "nano <file> {-r}"], 4)

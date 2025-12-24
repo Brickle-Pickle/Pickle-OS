@@ -1,6 +1,4 @@
 # shell.py -> Shell interface for the MiniPC.
-import uos
-import time
 from bin import command_controller
 from system.shared_states import input_buffer
 from system.config import BIG_DISPLAY
@@ -50,7 +48,7 @@ class Shell:
         args = parts[1:] if len(parts) > 1 else []
 
         # Check for help
-        if cmd == "!?":
+        if cmd == "</":
             if len(args) == 0:
                 # TODO: Show all commands
                 pass
@@ -66,4 +64,4 @@ class Shell:
             self.command_not_found(cmd)
 
     def command_not_found(self, cmd):
-        BIG_DISPLAY.show_error(["Command: " + cmd, "Not found"])
+        BIG_DISPLAY.show_info(["Command: " + cmd, "Not found"])

@@ -12,7 +12,7 @@ def cd(args):
         input_buffer["actual_path"] = "/"
     elif len(args) > 1:
         # Show an error message
-        BIG_DISPLAY.show_error(["cd: too many", "arguments"])
+        BIG_DISPLAY.show_info(["cd: too many", "arguments"])
     elif args[0] == "..":
         # Change to the parent directory
         uos.chdir("..")
@@ -29,7 +29,7 @@ def cd(args):
                 uos.chdir(input_buffer["actual_path"] + "/" + args[0])
         except:
             # Show an error message
-            BIG_DISPLAY.show_error(["cd: no such file", "or directory"])
+            BIG_DISPLAY.show_info(["cd: no such file", "or directory"])
             input_buffer["errased"] = True
             return
         input_buffer["actual_path"] = uos.getcwd()
@@ -38,3 +38,6 @@ def cd(args):
     BIG_DISPLAY.show()
     input_buffer["reset_keyboard"] = True
     input_buffer["reset_shell"] = True
+
+def help():
+    BIG_DISPLAY.show_info(["Usage: cd [path]", ".. for parent"], 4)

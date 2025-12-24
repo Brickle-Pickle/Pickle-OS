@@ -6,7 +6,7 @@ from system.sd_reader import SDReader
 # Constant definitions
 SYSTEM_NAME = "PickleOS"
 DEVELOPER = "BRICKLE PICKLE"
-VERSION = "0.1.1"
+VERSION = "0.1.2"
 DEBUG_MODE = True
 BOARD_TYPE = "ESP32-C3"  # Options: "PICO", "ESP32-C3"
 

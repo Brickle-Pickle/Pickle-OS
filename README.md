@@ -58,42 +58,42 @@ Once Pickle OS has booted, the following commands are available in the shell:
 * `or` - Alternate options.
 * `|!x|` - In commands with only `{}`, `!x` may appear, it means you have to use at least x options.
 * `command / command` - Same command with different alias options.
-* `!?` - This command have help message, to show it use `!? command`.
+* `</` - This command have help message, to show it use `</ command`.
 
 ### File System
-* `ls {path} {-l} {-d or -f}` 
+* `ls {path} {-l} {-d or -f} </` 
     - List files and directories (default path is current directory).
     - `path` - Path to the directory to list (relative or absolute), if empty it will list the current directory.
     - `-l` - List files with detailed information.
     - `-d` - List directories only.
     - `-f` - List files only.
-* `cd {path}`
+* `cd {path} </`
     - Change the current working directory.
     - `path` - Path to the directory to change to (relative or absolute), if empty it will change to the root directory.
     - `path = ..` - Go to the parent directory.
     - `path = /...` - Go to the ... directory starting from root (absolute path).
     - `path = ...` - Go to the ... directory starting from the current directory (relative path).
-* `cat [file]`
+* `cat [file] </`
     - Display the contents of a file (only works with `.txt` and `.py` files).
     - `file` - Path to the file to display (relative or absolute).
-* `mkdir [dir_name]`
+* `mkdir [dir_name] </`
     - Create a new directory.
     - `dir_name` - Name of the directory to create.
-* `rm [file or dir or *] {-f}`
+* `rm [file or dir or *] {-f} </`
     - Remove files or directories. <b style="color:red;"> `Warning: This action cannot be undone.`</b>
     - `file or dir` - Path to the file or directory to remove (relative or absolute).
     - `*` - Remove all files and directories in the current directory.
     - `*.ext` - Remove all files with the specified extension in the current directory.
     - `name.*` - Remove all files with the specified name in the current directory.
     - `-f` - Force delete folders (without it, folders will not be deleted)
-* `nano [file] {-r}`
+* `nano [file] {-r} </`
     - Edit the contents of a file (create if it doesn't exist) (only works with `.txt` files).
     - If the file has another extension it will be replaced with the `.txt` extension.
     - `file` - Path to the file to edit (relative or absolute).
     - `-r` - Read-Only mode (open the file in read-only mode, you can't edit it).
 
 ### Utilities
-* `sys {-cpu} {-mem} {-dsk / -disk} |!1|`
+* `sys {-cpu} {-mem} {-dsk / -disk} |!1| </`
     - Show system information.
     - `-cpu` - Show CPU information.
     - `-mem` - Show memory information.
@@ -105,9 +105,8 @@ Once Pickle OS has booted, the following commands are available in the shell:
 * [X] File system operations (create, show and delete files and directories). v0.0.10
 * [X] Route navigation (absolute and relative paths). v0.0.6
 * [X] Full text editor (nano style extension `file.txt`). - v0.1.0
-* [ ] System monitor (CPU, memory, disk usage). v0.1.x
-* [ ] Help menu (show available commands and options). v0.1.x
-* [ ] Benchmarking tools (CPU, memory, disk speed). v0.1.x
+* [X] System monitor (CPU, memory, disk usage). v0.1.1
+* [X] Help menu (show available commands and options). v0.1.2
 * [ ] Paint (simple pixel art editor extension `file.bitimg`). v0.2.x
 * [ ] BitLense (simple image viewer extension `file.bitimg`). v0.2.x
 * [ ] PassFinder (simple password manager extension `file.pass`) {`file.pass` [made with PassFinder] is a text file that contains the passwords in the format `name:password` you need to provide a password to access the file}. v0.3.x

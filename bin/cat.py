@@ -30,15 +30,15 @@ def read_lines_chunk(f, num_chars, leftover=""):
 def cat(args):
     # Validate arguments
     if len(args) == 0:
-        BIG_DISPLAY.show_error(["cat: no file", "to display"])
+        BIG_DISPLAY.show_info(["cat: no file", "to display"])
         return
 
     if len(args) > 1:
-        BIG_DISPLAY.show_error(["cat: too many", "arguments"])
+        BIG_DISPLAY.show_info(["cat: too many", "arguments"])
         return
 
     if not (args[0].endswith(".txt") or args[0].endswith(".py")):
-        BIG_DISPLAY.show_error(["cat: invalid file", "extension"])
+        BIG_DISPLAY.show_info(["cat: invalid file", "extension"])
         return
 
     # Open the file
@@ -110,5 +110,8 @@ def cat(args):
                         changed = True
                         time.sleep(scroll_delay)
     except OSError:
-        BIG_DISPLAY.show_error(["cat: no such", "file or directory"])
+        BIG_DISPLAY.show_info(["cat: no such", "file or directory"])
         return
+
+def help():
+    BIG_DISPLAY.show_info(["Usage:", "cat <filename>"], 4)
