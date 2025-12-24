@@ -1,6 +1,6 @@
 # command_controller.py -> Command controller for the MiniPC.
 import uos
-from bin import ls, cd, cat, mkdir, rm, nano, sys
+from bin import ls, cd, cat, mkdir, rm, nano, sys, paint, bitlense
 from system.config import BIG_DISPLAY
 
 command_controller = {
@@ -11,6 +11,9 @@ command_controller = {
     "rm": rm,
     "nano": nano,
     "sys": sys,
+    "paint": paint,
+    "bitlense": bitlense,
+    "bt": bitlense,
 }
 
 def is_command(command):

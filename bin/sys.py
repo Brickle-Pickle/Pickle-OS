@@ -11,7 +11,11 @@ def sys(args):
     _disk = True if "-dsk" in args  or "-disk" in args else False
 
     if not _cpu and not _mem and not _disk:
-        BIG_DISPLAY.show_info(["Usage error:", "no options"])
+        wait_time = 2 if _cpu else 0
+        wait_time += 2 if _mem else 0
+        wait_time += 2 if _disk else 0
+
+        BIG_DISPLAY.show_info(["Usage error:", "no options"], wait_time)
         input_buffer["errased"] = True
         input_buffer["reset_keyboard"] = True
         input_buffer["reset_shell"] = True
