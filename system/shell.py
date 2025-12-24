@@ -49,6 +49,14 @@ class Shell:
         # Get the command arguments
         args = parts[1:] if len(parts) > 1 else []
 
+        # Check for help
+        if cmd == "!?":
+            if len(args) == 0:
+                # TODO: Show all commands
+                pass
+            else:
+                command_controller.get_command_help(args[0])
+
         # Check if the command exists
         if command_controller.is_command(cmd):
             # Execute the command

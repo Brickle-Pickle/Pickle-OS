@@ -1,6 +1,6 @@
 # command_controller.py -> Command controller for the MiniPC.
 import uos
-from bin import ls, cd, cat, mkdir, rm, nano
+from bin import ls, cd, cat, mkdir, rm, nano, sys
 
 command_controller = {
     "ls": ls.ls,
@@ -9,6 +9,7 @@ command_controller = {
     "mkdir": mkdir.mkdir,
     "rm": rm.rm,
     "nano": nano.nano,
+    "sys": sys.sys,
 }
 
 def is_command(command):

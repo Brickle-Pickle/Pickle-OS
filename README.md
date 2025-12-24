@@ -56,6 +56,9 @@ Once Pickle OS has booted, the following commands are available in the shell:
 * `{}` - Optional argument.
 * `...` - Variable number of arguments.
 * `or` - Alternate options.
+* `|!x|` - In commands with only `{}`, `!x` may appear, it means you have to use at least x options.
+* `command / command` - Same command with different alias options.
+* `!?` - This command have help message, to show it use `!? command`.
 
 ### File System
 * `ls {path} {-l} {-d or -f}` 
@@ -90,8 +93,11 @@ Once Pickle OS has booted, the following commands are available in the shell:
     - `-r` - Read-Only mode (open the file in read-only mode, you can't edit it).
 
 ### Utilities
-* `help` - Show the help menu (commands and options).
-* `reboot` - Restart the system.
+* `sys {-cpu} {-mem} {-dsk / -disk} |!1|`
+    - Show system information.
+    - `-cpu` - Show CPU information.
+    - `-mem` - Show memory information.
+    - `-dsk / -disk` - Show disk information.
 
 ## Roadmap alpha v0.0.10
 
@@ -100,8 +106,8 @@ Once Pickle OS has booted, the following commands are available in the shell:
 * [X] Route navigation (absolute and relative paths). v0.0.6
 * [X] Full text editor (nano style extension `file.txt`). - v0.1.0
 * [ ] System monitor (CPU, memory, disk usage). v0.1.x
-* [ ] Benchmarking tools (CPU, memory, disk speed). v0.1.x
 * [ ] Help menu (show available commands and options). v0.1.x
+* [ ] Benchmarking tools (CPU, memory, disk speed). v0.1.x
 * [ ] Paint (simple pixel art editor extension `file.bitimg`). v0.2.x
 * [ ] BitLense (simple image viewer extension `file.bitimg`). v0.2.x
 * [ ] PassFinder (simple password manager extension `file.pass`) {`file.pass` [made with PassFinder] is a text file that contains the passwords in the format `name:password` you need to provide a password to access the file}. v0.3.x

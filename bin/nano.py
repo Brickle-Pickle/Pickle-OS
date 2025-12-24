@@ -1,7 +1,7 @@
 # nano.py -> PickleOS nano text editor (read and write files)
 import uos
 import time
-from system.config import SMALL_DISPLAY, BIG_DISPLAY, JOYSTICK, BUTTON_LEFT, BUTTON_RIGHT
+from system.config import SMALL_DISPLAY, BIG_DISPLAY, JOYSTICK
 from bin.cat import cat
 from system.keyboard import Keyboard
 from system.shared_states import input_buffer
@@ -21,6 +21,7 @@ def nano(args):
 
     file = None
 
+    # If readonly, find the first non-option argument
     if not readonly:
         file = args[0]
     else:
@@ -37,6 +38,7 @@ def nano(args):
 
     file_path = input_buffer["actual_path"] + "/" + file_name
 
+    # Check if the file exists, if not, create it
     try:
         uos.stat(file_path)
     except OSError:
@@ -58,6 +60,7 @@ def nano(args):
     input_buffer["update_shell"] = False
     input_buffer["errased"] = False
 
+    # Initialize cursor position and other state variables
     cursor_pos = len(content)
     needs_render = True
     cursor_state = True
@@ -67,6 +70,7 @@ def nano(args):
 
     in_command = True
     while in_command:
+        # If joystick button is pressed, save the file
         if JOYSTICK.is_button_pressed():
             in_command = False
             save_file(file_path, content)
@@ -86,6 +90,7 @@ def nano(args):
         if KEYBOARD.read_input():
             time.sleep(0.2)
 
+        # If modified, render the screen
         modified = False
         if input_buffer["update_shell"]:
             if input_buffer["errased"]:
@@ -103,6 +108,7 @@ def nano(args):
                     cursor_pos += len(typed_chars)
                     modified = True
 
+        # If enter is pressed, move cursor to next line or add newline
         if input_buffer["enter"]:
             if KEYBOARD.flat_keyboard[KEYBOARD.actual_pos] == '>':
                 cursor_pos = min(len(content), cursor_pos + 1)
@@ -123,11 +129,13 @@ def nano(args):
         if KEYBOARD.needs_render:
             KEYBOARD.display_keyboard()
 
+        # Update cursor state
         if time.ticks_diff(time.ticks_ms(), last_cursor_toggle) > 500:
             cursor_state = not cursor_state
             last_cursor_toggle = time.ticks_ms()
             needs_render = True
 
+        # Render the screen if needed
         if needs_render:
             BIG_DISPLAY.clear()
             lines = content.split('\n')
@@ -137,6 +145,7 @@ def nano(args):
                 BIG_DISPLAY.text(line[:21], 0, y)
                 y += 8
 
+            # Draw cursor if visible
             if cursor_state:
                 lines_before_cursor = content[:cursor_pos].split('\n')
                 current_line_index = len(lines_before_cursor) - 1
