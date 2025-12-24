@@ -83,6 +83,11 @@ Once Pickle OS has booted, the following commands are available in the shell:
     - `*.ext` - Remove all files with the specified extension in the current directory.
     - `name.*` - Remove all files with the specified name in the current directory.
     - `-f` - Force delete folders (without it, folders will not be deleted)
+* `nano [file] {-r}`
+    - Edit the contents of a file (create if it doesn't exist) (only works with `.txt` files).
+    - If the file has another extension it will be replaced with the `.txt` extension.
+    - `file` - Path to the file to edit (relative or absolute).
+    - `-r` - Read-Only mode (open the file in read-only mode, you can't edit it).
 
 ### Utilities
 * `help` - Show the help menu (commands and options).
@@ -93,7 +98,7 @@ Once Pickle OS has booted, the following commands are available in the shell:
 * [X] SD Card support (Mass storage). v0.0.3
 * [X] File system operations (create, show and delete files and directories). v0.0.10
 * [X] Route navigation (absolute and relative paths). v0.0.6
-* [ ] Full text editor (nano style extension `file.txt`). - v0.1.x
+* [X] Full text editor (nano style extension `file.txt`). - v0.1.0
 * [ ] System monitor (CPU, memory, disk usage). v0.1.x
 * [ ] Benchmarking tools (CPU, memory, disk speed). v0.1.x
 * [ ] Help menu (show available commands and options). v0.1.x
@@ -104,12 +109,12 @@ Once Pickle OS has booted, the following commands are available in the shell:
 * [ ] System settings (timezone, language, etc.). v0.3.x
 * [ ] Mini-games (Snake / Pong / Tic-Tac-Toe). v0.4.x
 * [ ] WiFi connectivity (HTTP Client / Mobile commands). v1.0.x
-    - [ ] Upload files to the server.
-    - [ ] Download files from the server.
-    - [ ] Command to send a notification to a mobile phone.
-        - [ ] Send notification "MiniPc beeps you" [beep]
-        - [ ] Send notification "MiniPc says: {message}" [message]
-        - [ ] Send notification "MiniPc sends: {file}" [file]
+    - [ ] Upload files to the server. v1.1.x
+    - [ ] Download files from the server. v1.1.x
+    - [ ] Command to send a notification to a mobile phone. v1.2.x
+        - [ ] Send notification "MiniPc beeps you" [beep] v1.2.x
+        - [ ] Send notification "MiniPc says: {message}" [message] v1.2.x
+        - [ ] Send notification "MiniPc sends: {file}" [file] v1.2.x
 * [ ] Extremly easy AI (Chatbot). v2.0.x
 
 ## Contributing

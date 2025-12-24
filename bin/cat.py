@@ -14,6 +14,8 @@ def read_lines_chunk(f, num_chars, leftover=""):
     # Read a chunk of data from the file
     data = f.read(BLOCK_SIZE)
     if not data:
+        if leftover:
+            return [leftover], "", True
         return [], "", True  # EOF
 
     data = leftover + data
@@ -28,32 +30,15 @@ def read_lines_chunk(f, num_chars, leftover=""):
 def cat(args):
     # Validate arguments
     if len(args) == 0:
-        BIG_DISPLAY.clear()
-        BIG_DISPLAY.text("cat: no file", 0, 10)
-        BIG_DISPLAY.text("to display", 0, 20)
-        BIG_DISPLAY.show()
-        time.sleep(2)
-        BIG_DISPLAY.clear()
-        input_buffer["errased"] = True
+        BIG_DISPLAY.show_error(["cat: no file", "to display"])
         return
 
     if len(args) > 1:
-        BIG_DISPLAY.clear()
-        BIG_DISPLAY.text("cat: too many", 0, 10)
-        BIG_DISPLAY.text("arguments", 0, 20)
-        BIG_DISPLAY.show()
-        time.sleep(2)
-        BIG_DISPLAY.clear()
-        input_buffer["errased"] = True
+        BIG_DISPLAY.show_error(["cat: too many", "arguments"])
         return
 
     if not (args[0].endswith(".txt") or args[0].endswith(".py")):
-        BIG_DISPLAY.clear()
-        BIG_DISPLAY.text("cat: invalid file", 0, 10)
-        BIG_DISPLAY.show()
-        time.sleep(2)
-        BIG_DISPLAY.clear()
-        input_buffer["errased"] = True
+        BIG_DISPLAY.show_error(["cat: invalid file", "extension"])
         return
 
     # Open the file
@@ -88,7 +73,9 @@ def cat(args):
                 # Load more data if needed
                 if not eof and scroll_offset + LINES_ON_SCREEN >= len(lines):
                     new_lines, leftover, eof = read_lines_chunk(f, num_chars, leftover)
-                    lines.extend(new_lines)
+                    if new_lines:
+                        lines.extend(new_lines)
+                        changed = True
 
                 # Update display if needed
                 if changed:
@@ -123,11 +110,5 @@ def cat(args):
                         changed = True
                         time.sleep(scroll_delay)
     except OSError:
-        BIG_DISPLAY.clear()
-        BIG_DISPLAY.text("cat: no such file", 0, 10)
-        BIG_DISPLAY.text("or directory", 0, 20)
-        BIG_DISPLAY.show()
-        time.sleep(2)
-        BIG_DISPLAY.clear()
-        input_buffer["errased"] = True
+        BIG_DISPLAY.show_error(["cat: no such", "file or directory"])
         return
