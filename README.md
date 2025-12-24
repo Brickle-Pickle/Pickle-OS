@@ -88,24 +88,29 @@ Once Pickle OS has booted, the following commands are available in the shell:
 * `help` - Show the help menu (commands and options).
 * `reboot` - Restart the system.
 
-## Roadmap
+## Roadmap alpha v0.0.10
 
-* [X] SD Card support (Mass storage).
-* [X] File system operations (create, show and delete files and directories).
-* [X] Route navigation (absolute and relative paths).
-* [ ] Full text editor (nano style extension `file.txt`).
-* [ ] System monitor (CPU, memory, disk usage).
-* [ ] User accounts and permissions.
-* [ ] Benchmarking tools (CPU, memory, disk speed).
-* [ ] Help menu (show available commands and options).
-* [ ] Paint (simple pixel art editor extension `file.bitimg`).
-* [ ] BitLense (simple image viewer extension `file.bitimg`).
-* [ ] PassFinder (simple password manager extension `file.pass`) {`file.pass` [made with PassFinder] is a text file that contains the passwords in the format `name:password` you need to provide a password to access the file}.
-* [ ] Crypter (convert `.txt` files to `.pass` files with a password).
-* [ ] WiFi connectivity (HTTP Client / Local Chat).
-* [ ] Mini-games (Snake / Pong).
-* [ ] System settings (timezone, language, etc.).
-* [ ] Mobile app for remote access.
+* [X] SD Card support (Mass storage). v0.0.3
+* [X] File system operations (create, show and delete files and directories). v0.0.10
+* [X] Route navigation (absolute and relative paths). v0.0.6
+* [ ] Full text editor (nano style extension `file.txt`). - v0.1.x
+* [ ] System monitor (CPU, memory, disk usage). v0.1.x
+* [ ] Benchmarking tools (CPU, memory, disk speed). v0.1.x
+* [ ] Help menu (show available commands and options). v0.1.x
+* [ ] Paint (simple pixel art editor extension `file.bitimg`). v0.2.x
+* [ ] BitLense (simple image viewer extension `file.bitimg`). v0.2.x
+* [ ] PassFinder (simple password manager extension `file.pass`) {`file.pass` [made with PassFinder] is a text file that contains the passwords in the format `name:password` you need to provide a password to access the file}. v0.3.x
+* [ ] Crypter (convert `.txt` files to `.pass` files with a password). v0.3.x
+* [ ] System settings (timezone, language, etc.). v0.3.x
+* [ ] Mini-games (Snake / Pong / Tic-Tac-Toe). v0.4.x
+* [ ] WiFi connectivity (HTTP Client / Mobile commands). v1.0.x
+    - [ ] Upload files to the server.
+    - [ ] Download files from the server.
+    - [ ] Command to send a notification to a mobile phone.
+        - [ ] Send notification "MiniPc beeps you" [beep]
+        - [ ] Send notification "MiniPc says: {message}" [message]
+        - [ ] Send notification "MiniPc sends: {file}" [file]
+* [ ] Extremly easy AI (Chatbot). v2.0.x
 
 ## Contributing
 
