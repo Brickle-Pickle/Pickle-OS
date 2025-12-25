@@ -104,8 +104,14 @@ Once Pickle OS has booted, the following commands are available in the shell:
 * `bitlense / bt [file] </`
     - View a simple pixel art image (only works with `.bitimg` files).
     - `file` - Path to the file to view (relative or absolute).
+* `passfinder [file] </`
+    - Find passwords in a file (only works with `.pass` files).
+    - `file` - Path to the file to search (relative or absolute).
+* `crypter [file] </`
+    - Convert a `.txt` file to a `.pass` file with a password.
+    - `file` - Path to the file to convert (relative or absolute).
 
-## Roadmap alpha v0.0.10
+## Roadmap alpha
 
 * [X] SD Card support (Mass storage). v0.0.3
 * [X] File system operations (create, show and delete files and directories). v0.0.10
@@ -115,8 +121,8 @@ Once Pickle OS has booted, the following commands are available in the shell:
 * [X] Help menu (show available commands and options). v0.1.2
 * [X] Paint (simple pixel art editor extension `file.bitimg`). v0.2.0
 * [X] BitLense (simple image viewer extension `file.bitimg`). v0.2.2
-* [ ] PassFinder (simple password manager extension `file.pass`) {`file.pass` [made with PassFinder] is a text file that contains the passwords in the format `name:password` you need to provide a password to access the file}. v0.3.x
-* [ ] Crypter (convert `.txt` files to `.pass` files with a password). v0.3.x
+* [x] PassFinder (simple password manager extension `file.pass`) {`file.pass` [made with PassFinder] is a text file that contains the passwords in the format `name:password` you need to provide a password to access the file}. v0.3.x
+* [x] Crypter (convert `.txt` files to `.pass` files with a password). v0.3.x
 * [ ] System settings (timezone, language, etc.). v0.3.x
 * [ ] Mini-games (Snake / Pong / Tic-Tac-Toe). v0.4.x
 * [ ] WiFi connectivity (HTTP Client / Mobile commands). v1.0.x

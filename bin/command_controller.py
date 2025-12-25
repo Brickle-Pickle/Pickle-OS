@@ -1,6 +1,6 @@
 # command_controller.py -> Command controller for the MiniPC.
 import uos
-from bin import ls, cd, cat, mkdir, rm, nano, sys, paint, bitlense
+from bin import ls, cd, cat, mkdir, rm, nano, sys, paint, bitlense, passfinder, crypter
 from system.config import BIG_DISPLAY
 
 command_controller = {
@@ -14,6 +14,10 @@ command_controller = {
     "paint": paint,
     "bitlense": bitlense,
     "bt": bitlense,
+    "passfinder": passfinder,
+    "crypter": crypter,
+    "pss": passfinder,
+    "crp": crypter,
 }
 
 def is_command(command):
@@ -21,9 +25,7 @@ def is_command(command):
 
 def execute_command(command, args):
     # If the command is an alias (like 'bt' for 'bitlense'), use the module name
-    
-    if command == "bt":
-        command = "bitlense"
+    command = switch_command(command)   
 
     if is_command(command):
         getattr(command_controller[command], command)(args)
@@ -32,9 +34,7 @@ def execute_command(command, args):
 
 def get_command_help(command):
     # If the command is an alias (like 'bt' for 'bitlense'), use the module name
-    
-    if command == "bt":
-        command = "bitlense"
+    command = switch_command(command)   
 
     if is_command(command):
         module = command_controller[command]
@@ -53,3 +53,13 @@ def get_command_help(command):
 
 def get_command_list():
     return command_controller.keys()
+
+def switch_command(command):
+    if command == "bt":
+        return "bitlense"
+    elif command == "pss":
+        return "passfinder"
+    elif command == "crp":
+        return "crypter"
+
+    return command
