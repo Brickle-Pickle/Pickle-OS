@@ -15,6 +15,12 @@ class Display:
         self.display.fill(color)
         self.display.show()
 
+    def fill_rect(self, x, y, w, h, c):
+        self.display.fill_rect(x, y, w, h, c)
+
+    def pixel(self, x, y, c):
+        self.display.pixel(x, y, c)
+
     def text(self, string, x, y, color=1):
         if self.text_size == 1:
             if color == "inverted":

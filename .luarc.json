@@ -1,0 +1,10 @@
+{
+    "diagnostics.disable": [
+        "lowercase-global",
+        "undefined-global"
+    ],
+    "diagnostics.globals": [
+        "update",
+        "init"
+    ]
+}

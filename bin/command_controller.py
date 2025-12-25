@@ -1,6 +1,6 @@
 # command_controller.py -> Command controller for the MiniPC.
 import uos
-from bin import ls, cd, cat, mkdir, rm, nano, sys, paint, bitlense, passfinder, crypter
+from bin import ls, cd, cat, mkdir, rm, nano, sys, paint, bitlense, passfinder, crypter, snake
 from system.config import BIG_DISPLAY
 
 command_controller = {
@@ -18,6 +18,8 @@ command_controller = {
     "crypter": crypter,
     "pss": passfinder,
     "crp": crypter,
+    "sn": snake,
+    "snake": snake,
 }
 
 def is_command(command):
@@ -61,5 +63,7 @@ def switch_command(command):
         return "passfinder"
     elif command == "crp":
         return "crypter"
+    elif command == "sn":
+        return "snake"
 
     return command

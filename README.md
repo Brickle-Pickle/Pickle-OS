@@ -104,12 +104,16 @@ Once Pickle OS has booted, the following commands are available in the shell:
 * `bitlense / bt [file] </`
     - View a simple pixel art image (only works with `.bitimg` files).
     - `file` - Path to the file to view (relative or absolute).
-* `passfinder [file] </`
+* `passfinder / pss [file] </`
     - Find passwords in a file (only works with `.pass` files).
     - `file` - Path to the file to search (relative or absolute).
-* `crypter [file] </`
+* `crypter / crp [file] </`
     - Convert a `.txt` file to a `.pass` file with a password.
     - `file` - Path to the file to convert (relative or absolute).
+
+### Mini-games
+* `snake / sn </`
+    - Play the classic Snake game.
 
 ## Roadmap alpha
 
@@ -121,10 +125,12 @@ Once Pickle OS has booted, the following commands are available in the shell:
 * [X] Help menu (show available commands and options). v0.1.2
 * [X] Paint (simple pixel art editor extension `file.bitimg`). v0.2.0
 * [X] BitLense (simple image viewer extension `file.bitimg`). v0.2.2
-* [x] PassFinder (simple password manager extension `file.pass`) {`file.pass` [made with PassFinder] is a text file that contains the passwords in the format `name:password` you need to provide a password to access the file}. v0.3.x
-* [x] Crypter (convert `.txt` files to `.pass` files with a password). v0.3.x
-* [ ] System settings (timezone, language, etc.). v0.3.x
-* [ ] Mini-games (Snake / Pong / Tic-Tac-Toe). v0.4.x
+* [x] PassFinder (simple password manager extension `file.pass`) {`file.pass` [made with PassFinder] is a text file that contains the passwords in the format `name:password` you need to provide a password to access the file}. v0.3.1
+* [x] Crypter (convert `.txt` files to `.pass` files with a password). v0.4.2
+* [ ] Mini-games (Snake / Pong / Tic-Tac-Toe).
+    - [X] Snake. v0.5.1
+    - [ ] Pong. v0.5.x
+    - [ ] Tic-Tac-Toe. v0.5.x
 * [ ] WiFi connectivity (HTTP Client / Mobile commands). v1.0.x
     - [ ] Upload files to the server. v1.1.x
     - [ ] Download files from the server. v1.1.x
