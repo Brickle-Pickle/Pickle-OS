@@ -101,6 +101,9 @@ Once Pickle OS has booted, the following commands are available in the shell:
 * `paint [file] </`
     - Paint a simple pixel art image (only works with `.bitimg` files).
     - `file` - Path to the file to paint (relative or absolute).
+* `bitlense / bt [file] </`
+    - View a simple pixel art image (only works with `.bitimg` files).
+    - `file` - Path to the file to view (relative or absolute).
 
 ## Roadmap alpha v0.0.10
 
@@ -110,8 +113,8 @@ Once Pickle OS has booted, the following commands are available in the shell:
 * [X] Full text editor (nano style extension `file.txt`). - v0.1.0
 * [X] System monitor (CPU, memory, disk usage). v0.1.1
 * [X] Help menu (show available commands and options). v0.1.2
-* [X] Paint (simple pixel art editor extension `file.bitimg`). v0.2.x
-* [ ] BitLense (simple image viewer extension `file.bitimg`). v0.2.x
+* [X] Paint (simple pixel art editor extension `file.bitimg`). v0.2.0
+* [X] BitLense (simple image viewer extension `file.bitimg`). v0.2.2
 * [ ] PassFinder (simple password manager extension `file.pass`) {`file.pass` [made with PassFinder] is a text file that contains the passwords in the format `name:password` you need to provide a password to access the file}. v0.3.x
 * [ ] Crypter (convert `.txt` files to `.pass` files with a password). v0.3.x
 * [ ] System settings (timezone, language, etc.). v0.3.x

@@ -73,12 +73,16 @@ class Display:
     def set_text_size(self, size):
         self.text_size = max(1, min(size, 4))
     
-    def show_info(self, error_messages, time = 2):
+    def show_info(self, error_messages, duration=2):
         self.clear()
         for i, msg in enumerate(error_messages):
             self.text(msg, 0, i * 10)
         self.show()
-        time.sleep(time)
+        time.sleep(duration)
         # Clear the error message
         self.clear()
+        # Reset shell state
+        input_buffer["input"] = " "
+        input_buffer["update_shell"] = False
         input_buffer["errased"] = True
+        input_buffer["enter"] = False

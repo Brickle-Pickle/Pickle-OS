@@ -20,12 +20,22 @@ def is_command(command):
     return command in command_controller
 
 def execute_command(command, args):
+    # If the command is an alias (like 'bt' for 'bitlense'), use the module name
+    
+    if command == "bt":
+        command = "bitlense"
+
     if is_command(command):
         getattr(command_controller[command], command)(args)
     else:
         return "X"
 
 def get_command_help(command):
+    # If the command is an alias (like 'bt' for 'bitlense'), use the module name
+    
+    if command == "bt":
+        command = "bitlense"
+
     if is_command(command):
         module = command_controller[command]
         if hasattr(module, "help"):
