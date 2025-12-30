@@ -114,6 +114,8 @@ Once Pickle OS has booted, the following commands are available in the shell:
 ### Mini-games
 * `snake / sn </`
     - Play the classic Snake game.
+* `pong / pn </`
+    - Play the classic Pong game.  
 
 ## Roadmap alpha
 
@@ -129,7 +131,7 @@ Once Pickle OS has booted, the following commands are available in the shell:
 * [x] Crypter (convert `.txt` files to `.pass` files with a password). v0.4.2
 * [ ] Mini-games (Snake / Pong / Tic-Tac-Toe).
     - [X] Snake. v0.5.1
-    - [ ] Pong. v0.5.x
+    - [x] Pong. v0.5.2
     - [ ] Tic-Tac-Toe. v0.5.x
 * [ ] WiFi connectivity (HTTP Client / Mobile commands). v1.0.x
     - [ ] Upload files to the server. v1.1.x

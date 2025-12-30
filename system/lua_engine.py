@@ -119,6 +119,17 @@ class LuaScript:
                 indent += 1
                 continue
                 
+            # Handle Single-line If: if cond then stmt end
+            # Very basic support: assumes " then " and " end" exist
+            if line.startswith("if ") and " then " in line and line.endswith(" end"):
+                parts = line.split(" then ")
+                cond = parts[0][3:].strip()
+                stmt = parts[1][:-4].strip() # remove end
+                cond = self._map_operators(cond)
+                stmt = self._map_operators(stmt)
+                py_lines.append(f"{current_indent}if {cond}: {stmt}")
+                continue
+                
             # Handle While
             # while condition do
             if line.startswith("while ") and line.endswith(" do"):
