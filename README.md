@@ -24,11 +24,11 @@ This project is designed for the following BOM (Bill of Materials):
 
 * **MCU:** Esp32 C3 SuperMini.
 * **Displays:**
-    * 1x OLED 128x128 (1.5" RGB/Mono) - *Main Monitor*.
-    * 1x OLED 128x32 (0.91") - *Virtual Keyboard*.
-* **Input:** 
-    * 2x Push buttons (1 action + 1 back).
-    * 1x D-Pad (4-directional + 1 action) - *Virtual Keyboard Navigation*.
+  * 1x OLED 128x128 (1.5" RGB/Mono) - *Main Monitor*.
+  * 1x OLED 128x32 (0.91") - *Virtual Keyboard*.
+* **Input:**
+  * 2x Push buttons (1 action + 1 back).
+  * 1x D-Pad (4-directional + 1 action) - *Virtual Keyboard Navigation*.
 
 ## Pinout and Connections
 
@@ -36,22 +36,23 @@ Check the `system/config.py` file for detailed pin assignments and connections f
 
 ## Installation
 
-1.  **Flash MicroPython:** Install the latest MicroPython UF2 firmware onto your Esp32 C3 SuperMini.
-2.  **Dependencies:** Upload the `ssd1306.py` and `sdcard.py` library to the `lib/` folder on your device (available via Thonny package manager).
-3.  **Deployment:**
+1. **Flash MicroPython:** Install the latest MicroPython UF2 firmware onto your Esp32 C3 SuperMini.
+2. **Dependencies:** Upload the `ssd1306.py` and `sdcard.py` library to the `lib/` folder on your device (available via Thonny package manager).
+3. **Deployment:**
     * Clone this repository.
     * Upload `main.py` (`app.py` if development still in progress), `boot.py`, and all other files to the root of the device (if you want to have the base folder structure and you are using a raspberry pi execute `mkfs.py` {JUST ONCE}).
 4. **Erase the following files:**
     * `mkfs.py`
     * `README.md`
     * `home/user/README.md` (Optional if you know what you are doing) {You can update it with your own instructions}
-5.  **Boot:** Reset the device or reconnect power.
+5. **Boot:** Reset the device or reconnect power.
 
 ## Available Commands
 
 Once Pickle OS has booted, the following commands are available in the shell:
 
 ### Options
+
 * `[]` - Mandatory argument.
 * `{}` - Optional argument.
 * `...` - Variable number of arguments.
@@ -61,61 +62,73 @@ Once Pickle OS has booted, the following commands are available in the shell:
 * `</` - This command have help message, to show it use `</ command`.
 
 ### File System
-* `ls {path} {-l} {-d or -f} </` 
-    - List files and directories (default path is current directory).
-    - `path` - Path to the directory to list (relative or absolute), if empty it will list the current directory.
-    - `-l` - List files with detailed information.
-    - `-d` - List directories only.
-    - `-f` - List files only.
+
+* `ls {path} {-l} {-d or -f} </`
+  * List files and directories (default path is current directory).
+  * `path` - Path to the directory to list (relative or absolute), if empty it will list the current directory.
+  * `-l` - List files with detailed information.
+  * `-d` - List directories only.
+  * `-f` - List files only.
 * `cd {path} </`
-    - Change the current working directory.
-    - `path` - Path to the directory to change to (relative or absolute), if empty it will change to the root directory.
-    - `path = ..` - Go to the parent directory.
-    - `path = /...` - Go to the ... directory starting from root (absolute path).
-    - `path = ...` - Go to the ... directory starting from the current directory (relative path).
+  * Change the current working directory.
+  * `path` - Path to the directory to change to (relative or absolute), if empty it will change to the root directory.
+  * `path = ..` - Go to the parent directory.
+  * `path = /...` - Go to the ... directory starting from root (absolute path).
+  * `path = ...` - Go to the ... directory starting from the current directory (relative path).
 * `cat [file] </`
-    - Display the contents of a file (only works with `.txt` and `.py` files).
-    - `file` - Path to the file to display (relative or absolute).
+  * Display the contents of a file (only works with `.txt` and `.py` files).
+  * `file` - Path to the file to display (relative or absolute).
 * `mkdir [dir_name] </`
-    - Create a new directory.
-    - `dir_name` - Name of the directory to create.
+  * Create a new directory.
+  * `dir_name` - Name of the directory to create.
 * `rm [file or dir or *] {-f} </`
-    - Remove files or directories. <b style="color:red;"> `Warning: This action cannot be undone.`</b>
-    - `file or dir` - Path to the file or directory to remove (relative or absolute).
-    - `*` - Remove all files and directories in the current directory.
-    - `*.ext` - Remove all files with the specified extension in the current directory.
-    - `name.*` - Remove all files with the specified name in the current directory.
-    - `-f` - Force delete folders (without it, folders will not be deleted)
+  * Remove files or directories. <b style="color:red;"> `Warning: This action cannot be undone.`</b>
+  * `file or dir` - Path to the file or directory to remove (relative or absolute).
+  * `*` - Remove all files and directories in the current directory.
+  * `*.ext` - Remove all files with the specified extension in the current directory.
+  * `name.*` - Remove all files with the specified name in the current directory.
+  * `-f` - Force delete folders (without it, folders will not be deleted)
 * `nano [file] {-r} </`
-    - Edit the contents of a file (create if it doesn't exist) (only works with `.txt` files).
-    - If the file has another extension it will be replaced with the `.txt` extension.
-    - `file` - Path to the file to edit (relative or absolute).
-    - `-r` - Read-Only mode (open the file in read-only mode, you can't edit it).
+  * Edit the contents of a file (create if it doesn't exist) (only works with `.txt` files).
+  * If the file has another extension it will be replaced with the `.txt` extension.
+  * `file` - Path to the file to edit (relative or absolute).
+  * `-r` - Read-Only mode (open the file in read-only mode, you can't edit it).
 
 ### Utilities
+
 * `sys {-cpu} {-mem} {-dsk / -disk} |!1| </`
-    - Show system information.
-    - `-cpu` - Show CPU information.
-    - `-mem` - Show memory information.
-    - `-dsk / -disk` - Show disk information.
+  * Show system information.
+  * `-cpu` - Show CPU information.
+  * `-mem` - Show memory information.
+  * `-dsk / -disk` - Show disk information.
 * `paint [file] </`
-    - Paint a simple pixel art image (only works with `.bitimg` files).
-    - `file` - Path to the file to paint (relative or absolute).
+  * Paint a simple pixel art image (only works with `.bitimg` files).
+  * `file` - Path to the file to paint (relative or absolute).
 * `bitlense / bt [file] </`
-    - View a simple pixel art image (only works with `.bitimg` files).
-    - `file` - Path to the file to view (relative or absolute).
+  * View a simple pixel art image (only works with `.bitimg` files).
+  * `file` - Path to the file to view (relative or absolute).
 * `passfinder / pss [file] </`
-    - Find passwords in a file (only works with `.pass` files).
-    - `file` - Path to the file to search (relative or absolute).
+  * Find passwords in a file (only works with `.pass` files).
+  * `file` - Path to the file to search (relative or absolute).
 * `crypter / crp [file] </`
-    - Convert a `.txt` file to a `.pass` file with a password.
-    - `file` - Path to the file to convert (relative or absolute).
+  * Convert a `.txt` file to a `.pass` file with a password.
+  * `file` - Path to the file to convert (relative or absolute).
 
 ### Mini-games
+
 * `snake / sn </`
-    - Play the classic Snake game.
+  * Play the classic Snake game.
 * `pong / pn </`
-    - Play the classic Pong game.  
+  * Play the classic Pong game.  
+* `tictactoe / tt </`
+  * Play the classic Tic-Tac-Toe game.
+
+### Network (WiFi)
+
+* `wifi [ssid] { -p [password]} </`
+  * Connect to a WiFi network.
+  * `ssid` - SSID of the WiFi network.
+  * `-p [password]` - Password of the WiFi network.
 
 ## Roadmap alpha
 
@@ -129,17 +142,17 @@ Once Pickle OS has booted, the following commands are available in the shell:
 * [X] BitLense (simple image viewer extension `file.bitimg`). v0.2.2
 * [x] PassFinder (simple password manager extension `file.pass`) {`file.pass` [made with PassFinder] is a text file that contains the passwords in the format `name:password` you need to provide a password to access the file}. v0.3.1
 * [x] Crypter (convert `.txt` files to `.pass` files with a password). v0.4.2
-* [ ] Mini-games (Snake / Pong / Tic-Tac-Toe).
-    - [X] Snake. v0.5.1
-    - [x] Pong. v0.5.2
-    - [ ] Tic-Tac-Toe. v0.5.x
+* [X] Mini-games (Snake / Pong / Tic-Tac-Toe).
+  * [X] Snake. v0.5.1
+  * [x] Pong. v0.5.2
+  * [x] Tic-Tac-Toe. v0.5.3
 * [ ] WiFi connectivity (HTTP Client / Mobile commands). v1.0.x
-    - [ ] Upload files to the server. v1.1.x
-    - [ ] Download files from the server. v1.1.x
-    - [ ] Command to send a notification to a mobile phone. v1.2.x
-        - [ ] Send notification "MiniPc beeps you" [beep] v1.2.x
-        - [ ] Send notification "MiniPc says: {message}" [message] v1.2.x
-        - [ ] Send notification "MiniPc sends: {file}" [file] v1.2.x
+  * [ ] Upload files to the server. v1.1.x
+  * [ ] Download files from the server. v1.1.x
+  * [ ] Command to send a notification to a mobile phone. v1.2.x
+    * [ ] Send notification "MiniPc beeps you" [beep] v1.2.x
+    * [ ] Send notification "MiniPc says: {message}" [message] v1.2.x
+    * [ ] Send notification "MiniPc sends: {file}" [file] v1.2.x
 * [ ] Extremly easy AI (Chatbot). v2.0.x
 
 ## Contributing

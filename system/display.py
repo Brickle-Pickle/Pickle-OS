@@ -21,6 +21,12 @@ class Display:
     def pixel(self, x, y, c):
         self.display.pixel(x, y, c)
 
+    def hline(self, x, y, w, c):
+        self.display.hline(x, y, w, c)
+
+    def vline(self, x, y, h, c):
+        self.display.vline(x, y, h, c)
+
     def text(self, string, x, y, color=1):
         if self.text_size == 1:
             if color == "inverted":
@@ -92,3 +98,4 @@ class Display:
         input_buffer["update_shell"] = False
         input_buffer["errased"] = True
         input_buffer["enter"] = False
+        input_buffer["reset_shell"] = True

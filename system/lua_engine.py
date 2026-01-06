@@ -62,7 +62,8 @@ class LuaScript:
                 # Special Directive for Python Globals
                 if line.startswith("-- py:"):
                     # Use current_indent instead of nothing, so it sits correctly inside functions
-                    py_lines.append(current_indent + line[6:].strip())
+                    # Use rstrip() to preserve leading spaces for manual indentation
+                    py_lines.append(current_indent + line[6:].rstrip())
                 else:
                     py_lines.append("    " * indent + "# " + line[2:])
                 continue
