@@ -7,7 +7,7 @@ from system.sd_reader import SDReader
 SYSTEM_NAME = "PickleOS"
 DEVELOPER = "BRICKLE PICKLE"
 VERSION = "0.5.2"
-DEBUG_MODE = True
+DEBUG_MODE = False
 BOARD_TYPE = "ESP32-C3"  # Options: "PICO", "ESP32-C3"
 
 # Pin configurations for ESP32-C3 Super Mini

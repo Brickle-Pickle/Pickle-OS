@@ -38,6 +38,7 @@ from system.keyboard import Keyboard
 from system.shared_states import input_buffer
 from system.wifi_manager import connect_to_wifi, get_wifi_status, test_connection
 from system.shared_states import input_buffer
+import env
 import time
 
 def wifi(args):
@@ -53,6 +54,21 @@ def wifi(args):
     # Check for test command
     if args[0] == "test":
         show_test()
+        return
+
+    # Check for send command
+    if args[0] == "send" or args[0] == "-s":
+        send_text_notification(args[1])
+        return
+
+    # Hardcoded wifi connection
+    if args[0] == "fake":
+        connect_to_wifi("fake", None)
+        input_buffer["reset_shell"] = True
+        return
+    if args[0] == "mb":
+        connect_to_wifi("mobile", None)
+        input_buffer["reset_shell"] = True
         return
 
     ssid = args[0]
@@ -124,6 +140,31 @@ def show_test():
         BIG_DISPLAY.show_info(["Connection test:", "SUCCESS!", message], 3)
     else:
         BIG_DISPLAY.show_info(["Connection test:", "FAILED!", message], 3)
+
+def send_text_notification(message):
+    """
+        To send a text notification to a connected mobile device,
+        you need to have the ntfy mobile app installed and configured
+        on your phone.
+    """
+    
+    import urequests
+    url = "https://ntfy.sh/" + env.ntfy_topic()  # Get the ntfy URL from env.py
+
+    try:   
+        response = urequests.post(
+            url, 
+            data=message,
+            headers={"Title": "MiniPC Notification", "Priority": "high"} # High priority
+        )
+
+        if response.status_code == 200:
+            BIG_DISPLAY.show_info(["Notification sent!"], 2)
+        else:
+            BIG_DISPLAY.show_info(["Failed to send", "notification."], 2)
+    
+    except Exception as e:
+        BIG_DISPLAY.show_info(["Error sending", "notification."], 2)
 
 def help(args):
     SMALL_DISPLAY.set_text_size(1)

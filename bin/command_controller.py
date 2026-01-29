@@ -24,7 +24,8 @@ command_controller = {
     "pong": pong,
     "tt": tictactoe,
     "tictactoe": tictactoe,
-    "wifi": wifi
+    "wifi": wifi,
+    "w": wifi
 }
 
 def is_command(command):
@@ -74,5 +75,7 @@ def switch_command(command):
         return "pong"
     elif command == "tt":
         return "tictactoe"
+    elif command == "w":
+        return "wifi"
 
     return command

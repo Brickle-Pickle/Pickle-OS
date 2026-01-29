@@ -9,6 +9,11 @@ def connect_to_wifi(ssid, password, timeout=25):
         ssid = wifi_ssid()
         password = wifi_password()
 
+    if ssid == "mb":
+        from env import wifi_ssid, wifi_password
+        ssid = wifi_ssid()
+        password = wifi_password()
+
     wlan = network.WLAN(network.STA_IF) # Create a station interface
     wlan.active(True) # Activate the interface
 

@@ -125,10 +125,13 @@ Once Pickle OS has booted, the following commands are available in the shell:
 
 ### Network (WiFi)
 
-* `wifi [ssid] { -p [password]} </`
+* `wifi / w ([ssid] { -p [password]}) or test or status or (send / -s [message]) </`
   * Connect to a WiFi network.
-  * `ssid` - SSID of the WiFi network.
-  * `-p [password]` - Password of the WiFi network.
+    * `ssid` - SSID of the WiFi network.
+    * `-p [password]` - Password of the WiFi network.
+  * `test` - Test the WiFi connection.
+  * `status` - Show the WiFi connection status.
+  * `send [message]` - Send a message to a connected mobile device (requires mobile app).
 
 ## Roadmap alpha
 
@@ -146,7 +149,7 @@ Once Pickle OS has booted, the following commands are available in the shell:
   * [X] Snake. v0.5.1
   * [x] Pong. v0.5.2
   * [x] Tic-Tac-Toe. v0.5.3
-* [ ] WiFi connectivity (HTTP Client / Mobile commands). v1.0.x
+* [X] WiFi connectivity (HTTP Client / Mobile commands). v1.0.x
   * [ ] Upload files to the server. v1.1.x
   * [ ] Download files from the server. v1.1.x
   * [ ] Command to send a notification to a mobile phone. v1.2.x
